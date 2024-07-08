@@ -1,0 +1,30 @@
+llm_providers:
+  - name: openai
+    url: "http://vllm:8000/v1"
+    credentials_path: config/openai/openai_api_key.txt
+    models:
+      - name: mistralai/Mistral-7B-Instruct-v0.2
+ols_config:
+  reference_content:
+    product_docs_index_path: "./vector_db/ocp_product_docs/4.15"
+    product_docs_index_id: ocp-product-docs-4_15
+    embeddings_model_path: "./embeddings_model"
+  conversation_cache:
+    type: memory
+    memory:
+      max_entries: 1000
+  logging_config:
+    app_log_level: info
+    lib_log_level: warning
+  tls_config:
+    tls_certificate_path: /app-root/certs/tls.crt
+    tls_key_path: /app-root/certs/tls.key
+  default_provider: openai
+  default_model: mistralai/Mistral-7B-Instruct-v0.2
+  user_data_collection:
+    feedback_disabled: true
+    transcripts_disabled: true
+dev_config:
+  enable_dev_ui: true
+  # llm_temperature_override: 0
+  disable_auth: true

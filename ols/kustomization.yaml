@@ -1,0 +1,26 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+labels:
+  - pairs:
+      app: openshift-lightspeed
+      app.kubernetes.io/component: lightspeed-w-rag
+      app.kubernetes.io/instance: lightspeed-w-rag
+      app.kubernetes.io/name: lightspeed-w-rag
+      app.kubernetes.io/part-of: lightspeed-w-rag-app
+    includeSelectors: true # <-- false by default
+    includeTemplates: true # <-- false by default\
+
+namespace: openshift-lightspeed
+
+resources:
+- ns.yaml
+- openshift-lightspeed-tls.yaml
+
+generatorOptions:
+  disableNameSuffixHash: true
+
+configMapGenerator:
+- name: olsconfig
+  files:
+  - olsconfig.yaml

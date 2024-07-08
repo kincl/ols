@@ -1,0 +1,34 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: openshift-lightspeed
+
+resources:
+- https://github.com/rh-aiservices-bu/llm-on-openshift.git/llm-servers/vllm/gitops?ref=3330f0313555d6dce43c992bb91ca7315ca4f027
+
+patches:
+- target:
+    version: v1
+    kind: Deployment
+    name: vllm
+  patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/args
+      value:
+        - --model
+        - mistralai/Mistral-7B-Instruct-v0.2
+        - --download-dir
+        - /models-cache
+        - --dtype
+        - auto
+        - --max-model-len
+        - "15264"
+
+    - op: replace
+      path: /spec/template/spec/containers/0/env/0
+      value:
+        name: HUGGING_FACE_HUB_TOKEN
+        value: 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
+
+
+
