@@ -28,7 +28,7 @@ patches:
       path: /spec/template/spec/containers/0/env/0
       value:
         name: HUGGING_FACE_HUB_TOKEN
-        value: 
+        value: TOKEN
 
 
 
