@@ -25,3 +25,9 @@ patches:
         - auto
         - --max-model-len
         - "30000"
+
+    - op: replace
+      path: /spec/template/spec/containers/0/env/0
+      value:
+        name: HUGGING_FACE_HUB_TOKEN
+        value: TOKEN
